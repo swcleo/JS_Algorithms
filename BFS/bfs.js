@@ -20,11 +20,11 @@ export function searchGraph(start) {
   // 使用 Set 記錄參訪順序，不重復
   const visited = new Set();
 
+  visited.add(start);
+
   while (queue.length > 0) {
     // 取得要參訪的節點
     const node = queue.shift();
-    // 存入參訪路徑
-    visited.add(node);
 
     // 取回鄰居節點
     const neighbours = fetchNeighbours(node);
@@ -33,6 +33,7 @@ export function searchGraph(start) {
       // 若鄰居節點還沒拜訪過，放到隊列待後續處理
       if (!visited.has(neighbour)) {
         queue.push(neighbour);
+        visited.add(neighbour);
       }
     }
   }
